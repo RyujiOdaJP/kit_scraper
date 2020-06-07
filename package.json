@@ -28,18 +28,19 @@
     "start": "echo 100",
     "commit": "git cz",
     "document": "yarn run document-express # & yarn run document-vue",
-    "readme": "npx readme-md-generator && yarn run readme-express # && yarn run readme-vue",
+    "readme": "npx readme-md-generator # && yarn run readme-express && yarn run readme-vue",
     "readme-express": "cd ./express && npx readme-md-generator",
     "readme-vue": "cd ./vue && npx readme-md-generator",
     "lint": "yarn run lint-code && yarn run lint-md && yarn run lint-text-en",
-    "lint-code": "",
-    "lint-text-en": "yarn run save-md && yarn run lint-text-en-express # & yarn run lint-text-en-vue",
+    "lint-code": "yarn run lint-code-express",
+    "lint-code-express": "cd ./express && yarn run lint",
+    "lint-text-en": "yarn run save-md # && yarn run lint-text-en-express & yarn run lint-text-en-vue",
     "lint-text-en-express": "textlint --fix ./express/*.md --config ./.textlints/.en.textlintrc",
     "lint-text-en-vue": "textlint --fix ./vue/*.md --config ./.textlints/.en.textlintrc",
     "lint-text-ja": "yarn run save-md && yarn run lint-text-ja-express & yarn run lint-text-ja-vue",
     "lint-text-ja-express": "textlint --fix ./express/*.md --config ./.textlints/.ja.textlintrc",
     "lint-text-ja-vue": "textlint --fix ./vue/*.md --config ./.textlints/.ja.textlintrc",
-    "lint-md": "yarn run lint-md-express # & yarn run lint-md-vue",
+    "lint-md": "# yarn run lint-md-express & yarn run lint-md-vue",
     "lint-md-express": "markdownlint ./express/DOCUMENT.md --fix",
     "lint-md-vue": "markdownlint ./vue/DOCUMENT.md --fix",
     "save-md": "yarn run save-md-express # & yarn run save-md-vue",
@@ -83,8 +84,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'comingsoon...\n'",
-      "pre-push": "echo 'comingsoon...\n'"
+      "pre-commit": "yarn run lint",
+      "pre-push": "yarn run lint"
     }
   },
   "config": {
