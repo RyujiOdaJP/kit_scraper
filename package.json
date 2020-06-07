@@ -1,0 +1,95 @@
+{
+  "name": "kit_scraper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RPA as learning TypeScript https://www.kit-victims.org/",
+  "author": "RyujiOdaJP <ryuji.oda@gmail.com>",
+  "contributors": [
+    "waricoma <waricoma@devne.co>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/RyujiOdaJP/kit_scraper#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyujiOdaJP/kit_scraper.git"
+  },
+  "keywords": [
+    "TypeScript",
+    "Express"
+  ],
+  "bugs": {
+    "url": "https://github.com/RyujiOdaJP/kit_scraper/issues"
+  },
+  "engines": {
+    "yarn": ">=1.22.4",
+    "node": ">=12.16.2"
+  },
+  "scripts": {
+    "start": "echo 100",
+    "commit": "git cz",
+    "document": "yarn run document-express # & yarn run document-vue",
+    "readme": "npx readme-md-generator && yarn run readme-express # && yarn run readme-vue",
+    "readme-express": "cd ./express && npx readme-md-generator",
+    "readme-vue": "cd ./vue && npx readme-md-generator",
+    "lint": "yarn run lint-code && yarn run lint-md && yarn run lint-text-en",
+    "lint-code": "",
+    "lint-text-en": "yarn run save-md && yarn run lint-text-en-express # & yarn run lint-text-en-vue",
+    "lint-text-en-express": "textlint --fix ./express/*.md --config ./.textlints/.en.textlintrc",
+    "lint-text-en-vue": "textlint --fix ./vue/*.md --config ./.textlints/.en.textlintrc",
+    "lint-text-ja": "yarn run save-md && yarn run lint-text-ja-express & yarn run lint-text-ja-vue",
+    "lint-text-ja-express": "textlint --fix ./express/*.md --config ./.textlints/.ja.textlintrc",
+    "lint-text-ja-vue": "textlint --fix ./vue/*.md --config ./.textlints/.ja.textlintrc",
+    "lint-md": "yarn run lint-md-express # & yarn run lint-md-vue",
+    "lint-md-express": "markdownlint ./express/DOCUMENT.md --fix",
+    "lint-md-vue": "markdownlint ./vue/DOCUMENT.md --fix",
+    "save-md": "yarn run save-md-express # & yarn run save-md-vue",
+    "save-md-express": "mkdir -p ./.textlints/saved/express && cp ./express/*.md ./.textlints/saved/express",
+    "save-md-vue": "mkdir -p ./.textlints/saved/vue && cp ./vue/*.md ./.textlints/saved/vue",
+    "restore-md": "yarn run restore-md-express # & yarn run restore-md-vue",
+    "restore-md-express": "mkdir -p ./.textlints/saved/express && cp ./.textlints/saved/express/*.md ./express",
+    "restore-md-vue": "mkdir -p ./.textlints/saved/vue &&  cp ./.textlints/saved/vue/*.md ./vue",
+    "ignore": "curl https://raw.githubusercontent.com/microsoft/TypeScript/master/.gitignore | add-text-to-markdown ./.gitignore --section 'microsoft/TypeScript:.gitignore' --write"
+  },
+  "devDependencies": {
+    "@textlint/textlint-plugin-markdown": "5.1.12",
+    "add-text-to-markdown": "2.0.0",
+    "commitizen": "4.1.2",
+    "cz-emoji": "1.2.1",
+    "generator-express-no-stress-typescript": "8.0.6",
+    "husky": "3.1.0",
+    "markdownlint": "0.20.2",
+    "markdownlint-cli": "0.23.0",
+    "nodemon-webpack-plugin": "4.3.1",
+    "readme-md-generator": "1.0.0",
+    "textlint": "11.6.3",
+    "textlint-filter-rule-comments": "1.2.2",
+    "textlint-rule-ginger": "2.2.1",
+    "textlint-rule-ja-space-after-question": "2.0.1",
+    "textlint-rule-max-ten": "2.0.3",
+    "textlint-rule-no-dead-link": "4.6.2",
+    "textlint-rule-no-mix-dearu-desumasu": "4.0.1",
+    "textlint-rule-preset-ja-spacing": "2.0.1",
+    "textlint-rule-preset-ja-technical-writing": "3.1.3",
+    "textlint-rule-preset-japanese": "4.0.4",
+    "textlint-rule-prh": "5.3.0",
+    "textlint-rule-spellcheck-tech-word": "5.0.0",
+    "typedoc": "0.17.6",
+    "yo": "3.1.1",
+    "@typescript-eslint/eslint-plugin": "2.31.0",
+    "@typescript-eslint/parser": "2.31.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-prettier": "3.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo 'comingsoon...\n'",
+      "pre-push": "echo 'comingsoon...\n'"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-emoji"
+    }
+  }
+}
