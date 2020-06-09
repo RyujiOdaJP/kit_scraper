@@ -32,4 +32,4 @@ s.cp('.env', `${outDir}/.env`);
   // Run those
   await generateSwaggerSpec(swaggerOptions, routeOptions);
   await generateRoutes(routeOptions, swaggerOptions);
-})();
+})(); 

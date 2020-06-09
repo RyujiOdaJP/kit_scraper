@@ -25,7 +25,7 @@
     "node": ">=12.16.2"
   },
   "scripts": {
-    "start": "echo 100",
+    "start": "cd express && yarn install && yarn run build && yarn run start",
     "commit": "git cz",
     "document": "yarn run document-express # & yarn run document-vue",
     "readme": "npx readme-md-generator # && yarn run readme-express && yarn run readme-vue",
