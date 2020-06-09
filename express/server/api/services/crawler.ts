@@ -19,14 +19,13 @@ const transporter = nodemailer.createTransport({
 });
 
 const db = new Nedb({
-  filename: path.join(__dirname, '..', '..', '..', '..', 'pages.db'),
+  filename: path.join(__dirname, '..', '..', '..', 'pages.db'),
   autoload: true,
 });
 
 const urls: string[] = [];
-
 csvtojson()
-  .fromFile(path.join(__dirname, '..', '..', '..', '..', 'url.csv'))
+  .fromFile(path.join(__dirname, '..', '..', '..', 'url.csv'))
   .then((urlsJQ) => {
     console.log(urlsJQ);
     db.find({}, (err, docs) => {
