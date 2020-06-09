@@ -1,4 +1,54 @@
 import L from '../../common/logger';
+import * as diff from 'diff';
+import Nedb from 'nedb';
+import csvtojson from 'csvtojson';
+import nodemailer from 'nodemailer';
+import axios from 'axios';
+import path from 'path';
+import xssFilters from 'xss-filters';
+
+const transporter = nodemailer.createTransport({
+  service: 'Zoho',
+  host: this.service,
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.BOT_EMAIL_ADDRESS.toString(),
+    pass: process.env.BOT_EMAIL_PASSWORD.toString(),
+  },
+});
+
+const db = new Nedb({
+  filename: path.join(__dirname, '..', '..', '..', '..', 'pages.db'),
+  autoload: true,
+});
+
+const urls: string[] = [];
+
+csvtojson()
+  .fromFile(path.join(__dirname, '..', '..', '..', '..', 'url.csv'))
+  .then((urlsJQ) => {
+    console.log(urlsJQ);
+    db.find({}, (err, docs) => {
+      if (err) {
+        throw err;
+      }
+
+      for (const urlJQ of urlsJQ) {
+        urls.push(urlJQ.URLs);
+      }
+
+      for (const doc of docs) {
+        if (urls.indexOf(doc.url) === -1) {
+          db.remove({ _id: doc._id });
+        }
+      }
+
+      for (const url of urls) {
+        db.update({ url }, { $set: { url } }, { upsert: true });
+      }
+    });
+  });
 
 export const run = (): string => {
   L.info('/crawler/run/');

@@ -1,9 +1,30 @@
 {
   "name": "kit_scraper_express",
   "version": "1.0.0",
+  "private": true,
   "description": "RPA as learning TypeScript/Express https://www.kit-victims.org/",
-  "main": "index.js",
+  "author": "RyujiOdaJP <ryuji.oda@gmail.com>",
+  "contributors": [
+    "waricoma <waricoma@devne.co>"
+  ],
   "license": "MIT",
+  "homepage": "https://github.com/RyujiOdaJP/kit_scraper#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyujiOdaJP/kit_scraper.git"
+  },
+  "keywords": [
+    "TypeScript",
+    "Express"
+  ],
+  "bugs": {
+    "url": "https://github.com/RyujiOdaJP/kit_scraper/issues"
+  },
+  "engines": {
+    "yarn": ">=1.22.4",
+    "node": ">=12.16.2"
+  },
+  "main": "index.js",
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "ts-node ./build.ts && tsc --lib es2020",
@@ -17,18 +38,28 @@
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "csvtojson": "^2.0.10",
+    "diff": "^4.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-openapi-validator": "^3.12.7",
     "fs-extra": "^9.0.1",
     "helmet": "^3.22.0",
+    "nedb": "^1.8.0",
+    "nodemailer": "^6.4.8",
     "pino": "^6.2.1",
     "swagger-ui-express": "^4.1.4",
-    "tsoa": "^2.5.14"
+    "tsoa": "^2.5.14",
+    "xss-filters": "^1.2.7"
   },
   "devDependencies": {
+    "@types/csvtojson": "^1.1.5",
+    "@types/diff": "^4.0.2",
     "@types/express": "^4.17.6",
+    "@types/nedb": "^1.8.9",
+    "@types/nodemailer": "^6.4.0",
     "@types/pino": "^6.0.0",
+    "@types/xss-filters": "^0.0.27",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "eslint": "^6.8.0",
@@ -43,6 +74,5 @@
     "ts-node": "^8.9.1",
     "tslint": "^6.1.2",
     "typescript": "^3.8.3"
-  },
-  "author": "Carmine DiMascio <cdimascio@gmail.com> (https://github.com/cdimascio)"
+  }
 }
