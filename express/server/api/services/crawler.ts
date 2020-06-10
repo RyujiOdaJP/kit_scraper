@@ -66,13 +66,21 @@ export const run = (): string => {
         console.log('checking...', doc.url);
         res = await axios.get(doc.url);
       } catch (err) {
+        let html: string = `
+        <h1>
+          The below URL was deleted or went wrong
+        </h1>
+          <a href="${doc.url}">${doc.url}</a>
+        <pre>${JSON.stringify(err.toString(), null, 2)}</pre>
+        `;
+
         transporter
           .sendMail({
             from: process.env.BOT_EMAIL_ADDRESS.toString(),
             to: process.env.DEVS_MAIL_LIST.toString(),
             subject: process.env.SUBJECT.toString(),
             text: 'Please use the email client of using HTML render.',
-            html: 'Some URL has been deleted or went wrong. Check the page.',
+            html: html,
           })
           .then((info) => {
             console.log(info);
@@ -81,6 +89,7 @@ export const run = (): string => {
             console.log(err);
           });
         console.log(err);
+        continue;
       }
 
       if (!('html' in doc)) {
@@ -107,9 +116,9 @@ export const run = (): string => {
     let html = '<ol>';
     for (const url of urls) {
       if (updatedUrls.indexOf(url) !== -1) {
-        html += '<li>🚨 <a href="' + url + '"></a>' + url + '</li>';
+        html += `<li>🚨 <a href="${url}"></a>${url}</li>`;
       } else {
-        html += '<li>✅ <a href="' + url + '"></a>' + url + '</li>';
+        html += `<li>✅ <a href="${url}"></a>${url}</li>`;
       }
     }
     html += '</ol>';
@@ -131,13 +140,12 @@ export const run = (): string => {
 
     for (let i = 0; i < updatedUrls.length; i++) {
       html +=
-        '<div style="border: 1px;"><a href="' +
-        updatedUrls[i] +
-        '">' +
-        updatedUrls[i] +
-        '</a><pre>' +
-        xssFilters.inHTMLData(JSON.stringify(patches[i], null, 2)) +
-        '</pre></div>';
+        `<div style="border: 1px;">
+          <a href="${updatedUrls[i]}">${updatedUrls[i]}</a>
+          <pre>
+          ${xssFilters.inHTMLData(JSON.stringify(patches[i], null, 2))}
+          </pre>
+        </div>`;
     }
     //For developers
     transporter
